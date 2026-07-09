@@ -1,1 +1,222 @@
+/* ==========================================================================
+   NepaliEcoChat.bot - Design System & Custom Stylesheet
+   ========================================================================== */
 
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Variables
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette */
+  --primary-emerald: #52b788;       /* Glowing green from logo */
+  --primary-hover: #7ecd8b;         /* Lighter green for hover states */
+  --dark-forest-bg: #0b1a13;        /* Dark slate green background */
+  --dark-card-bg: #12281d;          /* Slightly lighter card background */
+  --navbar-bg: rgba(11, 26, 19, 0.8);/* Transparent dark green for glassmorphism */
+  
+  --text-white: #ffffff;
+  --text-muted: #a3c4bc;            /* Soft slate gray/green for secondary text */
+  --text-dark: #1b4332;
+  
+  /* Fonts */
+  --font-heading: 'Outfit', 'Segoe UI', sans-serif;
+  --font-body: 'Inter', 'Segoe UI', sans-serif;
+  
+  /* Spacing & Borders */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-glass: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* --------------------------------------------------------------------------
+   2. Global Resets
+   -------------------------------------------------------------------------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--dark-forest-bg);
+  color: var(--text-white);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-smooth);
+}
+
+/* --------------------------------------------------------------------------
+   3. Header & Navigation Bar
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Support for Safari */
+  border-bottom: var(--border-glass);
+  padding: 1rem 2rem;
+  transition: var(--transition-smooth);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo Styling (Icon + HTML Text) */
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem; /* Reduced gap to bring text closer to the icon */
+  height: 54px; /* Increased height to accommodate a larger logo */
+  cursor: pointer;
+}
+
+.logo-icon {
+  height: 50px; /* Increased size of the transparent icon */
+  width: auto;
+  object-fit: contain;
+  margin-right: -2px; /* Pulls the text closer by offsetting the blank space in the image */
+  
+  /* Transition for smooth interactive hover effects */
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
+}
+
+.logo-text {
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem; /* Increased size to match the larger icon */
+  color: var(--text-white);
+  letter-spacing: -0.5px;
+  
+  /* Smooth transition for text slide */
+  transition: transform 0.3s ease;
+}
+
+.logo-accent {
+  color: var(--primary-emerald);
+  transition: color 0.3s ease;
+}
+
+/* --- Interactive Hover Effects --- */
+.logo-link:hover .logo-icon {
+  /* Scales up slightly, tilts 3 degrees (spring bounce effect), and glows green */
+  transform: scale(1.08) rotate(3deg);
+  filter: drop-shadow(0 0 8px rgba(82, 183, 136, 0.6));
+}
+
+.logo-link:hover .logo-text {
+  /* Slides text slightly right to create a spacing effect when icon scales */
+  transform: translateX(3px);
+}
+
+.logo-link:hover .logo-accent {
+  /* Changes ".bot" color to a lighter lime green */
+  color: var(--primary-hover);
+}
+
+/* Menu Links */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.nav-item {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  font-size: 1rem;
+  color: var(--text-muted);
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+/* Modern Hover Underline Indicator */
+.nav-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-emerald);
+  transition: var(--transition-smooth);
+}
+
+.nav-item:hover {
+  color: var(--text-white);
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   4. Buttons & CTAs
+   -------------------------------------------------------------------------- */
+/* Rounded Pill-Shaped Button ("Hemisphere on two sides") */
+.btn-chat-now {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--dark-forest-bg);
+  background-color: var(--primary-emerald);
+  padding: 0.75rem 2rem;
+  border-radius: 9999px; /* This makes both sides perfect hemispheres */
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(82, 183, 136, 0.3);
+  display: inline-block;
+}
+
+.btn-chat-now:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(82, 183, 136, 0.5);
+}
+
+.btn-chat-now:active {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   5. Media Queries for Mobile Responsiveness (Navbar focus)
+   -------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.75rem 1rem;
+  }
+  
+  .logo-link {
+    height: 40px;
+  }
+  
+  .logo-icon {
+    height: 34px;
+  }
+  
+  .logo-text {
+    font-size: 1.2rem;
+  }
+  
+  .nav-menu {
+    display: none; /* We will make a mobile menu toggle later, keeping it clean for now */
+  }
+}
